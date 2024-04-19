@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import Post from '.';
 import PostComment from '.';
 
 describe('Teste para o componente PostComment', () => {
@@ -16,6 +15,30 @@ describe('Teste para o componente PostComment', () => {
                 value: 'Este é o primeiro comentário! ;D',
             }
         })
-        fireEvent.click(screen.getByText('btn-comentario'));
+        fireEvent.click(screen.getByTestId('btn-comentario'));
+
+        fireEvent.change(screen.getByTestId('textarea-comentario'), {
+            target: {
+                value: 'Cheguei em segundo aqui, hein!',
+            }
+        })
+        fireEvent.click(screen.getByTestId('btn-comentario'));
+
+        fireEvent.change(screen.getByTestId('textarea-comentario'), {
+            target: {
+                value: 'Como funciona isso aqui?',
+            }
+        })
+        fireEvent.click(screen.getByTestId('btn-comentario'));
+
+        fireEvent.change(screen.getByTestId('textarea-comentario'), {
+            target: {
+                value: 'Tô só testando mesmo XD'
+                ,
+            }
+        })
+        fireEvent.click(screen.getByTestId('btn-comentario'));
+
+        expect(screen.getAllByTestId('commentario').length).toBe(4);
     })
 });
